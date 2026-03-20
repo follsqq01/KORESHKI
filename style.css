@@ -1,0 +1,1187 @@
+:root {
+  --bg: #f14c2d;
+  --white: #fffaf5;
+  --menu-bg: #fffaf5;
+  --blue: #b4c1c7;
+  --font: "Helvetica Neue Custom", Helvetica, Arial, sans-serif;
+
+  /* Единые переменные для резиновости */
+  --radius-main: 2vw;
+  --section-pad-y: 10vh;
+  --section-pad-x: 5vw;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --radius-main: 4vw; /* На мобилках скругления чуть больше для пропорции */
+    --section-pad-y: 8vh;
+  }
+}
+
+@font-face {
+  font-family: "Helvetica Neue Custom";
+  src: url("HelveticaNeue-Roman.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Helvetica Neue Custom";
+  src: url("HelveticaNeue-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--white);
+  color: var(--white);
+  overflow-x: hidden;
+  font-weight: 400;
+}
+
+::selection {
+  background-color: #ff5722;
+  color: var(--white);
+}
+
+.title,
+.voices__title,
+h1,
+h2,
+h3 {
+  font-weight: 500 !important;
+}
+
+/* === БАЗОВЫЕ ОТСТУПЫ ДЛЯ ВСЕХ СЕКЦИЙ === */
+.about-section,
+.voices,
+.shop,
+.creators,
+.faq-section {
+  padding: var(--section-pad-y) var(--section-pad-x);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+.creators {
+  height: 80vh !important;
+}
+/* === HERO СЕКЦИЯ === */
+.hero {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  background-color: var(--white) !important;
+  z-index: -20;
+}
+
+.main-wrapper {
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* НАВИГАЦИЯ */
+.main-nav {
+  position: fixed; /* Меню будет всегда сверху при скролле */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5vh;
+  background-color: #fffaf5; /* Тот самый бежевый фон из ваших переменных */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  /* Легкая тень, чтобы отделить от контента при скролле */
+}
+.stickers {
+  position: absolute;
+  height: auto;
+  left: 1%;
+  top: 70%;
+}
+.nav-wrapper {
+  margin-top: 0.5vh;
+  width: 90vw;
+  display: flex;
+  justify-content: space-between; /* Располагает пункты как на фото */
+  align-items: center;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: var(--blue); /* Цвет из макета */
+  font-size: 1.2vw;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05vw;
+  transition: opacity 0.3s ease;
+}
+
+.nav-item:hover {
+  opacity: 0.7;
+}
+
+/* Корректировка Hero-секции, так как меню теперь фиксированное */
+.hero {
+  padding-top: 2vh; /* Чтобы контент не заезжал под меню */
+}
+
+/* Адаптив для мобилок */
+@media (max-width: 768px) {
+  .nav-item {
+    font-size: 3vw;
+  }
+  .nav-wrapper {
+    width: 90vw;
+  }
+}
+
+.rotated {
+  transform: rotate(225deg);
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+  flex-direction: column;
+  gap: 0.7vh;
+}
+
+.bar {
+  width: 2vw;
+  height: 0.3vh;
+  background: var(--blue) !important;
+  border-radius: 1vw;
+}
+
+/* Всплывающее меню для мобильного */
+.dropdown-list {
+  position: fixed;
+  top: 5vh;
+  left: 0;
+  width: 100%;
+  background: var(--menu-bg);
+  z-index: 2500;
+  flex-direction: column;
+  align-items: center;
+  gap: 3vh;
+
+  /* Новые свойства для анимации выезжания */
+  display: flex;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdown-list.open {
+  max-height: 100vh; /* Раскрываем блок */
+  padding: 0vh 0 0vh;
+}
+.dropdown-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4vw;
+  margin-top: 2vh;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12vw;
+  max-width: 44px;
+  min-width: 34px;
+  aspect-ratio: 1 / 1;
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.social-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.social-link:hover .social-icon {
+  opacity: 0.75;
+}
+
+/* КОНТЕНТ HERO */
+.content {
+  margin-top: 8vh;
+  text-align: center;
+  width: 100%;
+  color: var(--blue) !important;
+}
+.about-bg {
+  margin-top: -25%;
+  padding-bottom: 2%;
+  z-index: 0;
+}
+.title {
+  font-size: 3vw;
+  line-height: 1.1;
+  margin-bottom: 2vh;
+}
+
+.subtitle {
+  font-size: 1.5vw;
+  padding-bottom: 5vh;
+  width: 35vw;
+  margin: 0 auto; /* Центрирует сам блок mockup относительно родителя */
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+  margin-bottom: 8vh;
+}
+
+.btn {
+  padding: 1.5vh 3vw;
+  padding-top: 2vh !important;
+  border-radius: var(--radius-main);
+  text-decoration: none;
+  font-size: 1.1vw;
+  font-weight: 500;
+}
+
+.btn-fill {
+  background: var(--blue) !important;
+  color: var(--white) !important;
+}
+
+.btn-border {
+  border: 0.1vw solid var(--blue);
+  color: var(--blue);
+}
+
+.mockup {
+  width: 90%;
+  height: 50vh;
+  margin: 0 auto; /* Центрирует сам блок mockup относительно родителя */
+  background: var(--blue) !important;
+  border-radius: var(--radius-main) var(--radius-main) 0 0;
+  padding: 1.5vw 1.5vw 0 1.5vw;
+
+  /* Чтобы внутренний mockup-inner тоже работал корректно */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mockup-inner {
+  width: 100%;
+  height: 100%;
+  background: var(--white) !important;
+  border-radius: calc(var(--radius-main) * 0.7) calc(var(--radius-main) * 0.7) 0
+    0;
+}
+
+.cruzheva_home {
+  position: absolute;
+  bottom: -4%;
+  width: 100%;
+  height: 50vh;
+  left: 0;
+  z-index: -1;
+  object-fit: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* === ABOUT СЕКЦИЯ === */
+.about-section {
+  background-color: var(--blue);
+  overflow: hidden;
+  border-radius: 5vw 5vw 0% 0%; /* Скругляем только верхние углы */
+}
+
+.about-title {
+  font-size: 3vw;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1;
+  margin-top: 4vh;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2vw;
+  width: 100%;
+}
+
+.card-wrapper {
+  perspective: 900px;
+  opacity: 0;
+  transform: translateY(10vh);
+  padding-bottom: 5vh;
+}
+
+.card {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 22 / 32;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: rotate(var(--rotation));
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: rotate(0deg) rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background: var(--white);
+  border-radius: var(--radius-main);
+  padding: 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-front {
+  z-index: 2;
+  color: var(--bg);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  color: #59403e;
+  justify-content: flex-start;
+}
+
+.card-title {
+  font-weight: 400;
+  font-size: 1.8vw;
+  color: #59403e;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.card-title.bottom {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.card-number {
+  font-weight: 400;
+  font-size: 1.2vw;
+  color: #3c2a28;
+}
+
+.card-number.top-right,
+.card-number.bottom-right {
+  align-self: flex-end;
+}
+
+.card-text {
+  font-weight: 400;
+  font-size: 1.1vw;
+  line-height: 1.4;
+  color: #3c2a28;
+}
+
+/* === VOICES СЕКЦИЯ === */
+.voices {
+  /* background-color: #3c2a28; */
+  /* background-image: url("img/brown_back.png"); */
+  background-size: cover;
+  color: var(--blue);
+  overflow: hidden;
+}
+
+.voices__inner {
+  width: 100vw;
+  max-width: none;
+  text-align: center;
+}
+
+.voices__title {
+  font-size: 3vw;
+  margin-bottom: 2vh;
+  text-transform: uppercase;
+  letter-spacing: 0.02vw;
+}
+
+.voices__subtitle {
+  font-size: 1.5vw;
+  opacity: 0.95;
+  width: 35vw;
+  margin: 0 auto 7vh;
+}
+
+.gallery {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery__track {
+  display: flex;
+  width: max-content;
+  animation: galleryScroll 25s linear infinite;
+}
+
+.gallery:hover .gallery__track {
+  animation-play-state: paused;
+}
+
+@keyframes galleryScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.gallery__item {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 18vw;
+  margin-right: 2vw;
+}
+
+.gallery__circle {
+  width: 15vw;
+  height: 15vw;
+  border-radius: 50%; /* Кружки оставляем круглыми */
+  overflow: hidden;
+  background: #5a4a3a;
+  margin-bottom: 2vh;
+  flex-shrink: 0;
+  /* box-shadow: 0 0.5vh 1vw rgba(0, 0, 0, 0.2); */
+}
+
+.gallery__circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.flower {
+  position: absolute;
+  margin-top: 5vw;
+  transform: translateY(-50%);
+  width: 6vw;
+  height: auto;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.flower--left {
+  margin-top: 6vw;
+  margin-left: 18vw;
+  width: 17vw;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+.flower--right {
+  margin-top: 6vw;
+  right: 18vw;
+  width: 17vw;
+  transform: translateY(-50%) scaleX(1);
+}
+
+.gallery__name {
+  font-size: 1.3vw;
+  color: var(--blue);
+  margin-bottom: 0.5vh;
+}
+
+.gallery__role {
+  font-size: 1vw;
+  color: var(--blue);
+  opacity: 0.7;
+}
+
+/* === SHOP СЕКЦИЯ === */
+.shop {
+  background-color: var(--blue);
+  border-radius: 5vw 5vw 0% 0%;
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between; /* Расталкивает слова по краям */
+  width: 100%;
+  align-items: baseline;
+}
+
+/* Универсальные настройки для крупных заголовков */
+.shop-title,
+.shop-title5,
+.shop-title5-1,
+.about-title,
+.voices__title,
+.faq-title,
+.creators__title {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 50vw !important; /* Ограничиваем ширину для всех заголовков */
+  margin-left: auto !important; /* Центрирование */
+  margin-right: auto !important; /* Центрирование */
+  text-transform: uppercase !important;
+  line-height: 1.05 !important;
+  font-weight: 500 !important;
+  text-align: center !important; /* На случай, если в строке одно слово */
+}
+
+/* Специфические размеры и цвета (на основе вашего кода) */
+.shop-title5-1 {
+  font-size: 4vw !important;
+  color: var(--blue);
+  margin-bottom: 4vh;
+}
+
+.shop-title5,
+.creators__title {
+  font-size: 6vw !important;
+  color: var(--blue);
+  margin-bottom: 6vh;
+}
+
+.voices__title,
+.faq-title {
+  font-size: 4vw !important;
+  color: var(--blue);
+  margin-bottom: 5vh;
+}
+.about-title {
+  font-size: 4vw !important;
+  color: var(--white);
+}
+
+.shop-title {
+  font-size: 4vw !important;
+  color: var(--white); /* Белый для секции магазина */
+  margin-bottom: 1vh;
+}
+.shop-title5-1 {
+  font-size: 4.5vw;
+  text-transform: uppercase;
+  color: var(--blue);
+  line-height: 1.05;
+  width: 60vw; /* Ограничиваем ширину контейнера заголовка */
+  margin: 0 auto 4vh auto; /* Магия центрирования: auto слева и справа ставят блок ровно по центру */
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+/* Новый класс для строк заголовка */
+.title-row {
+  display: flex;
+  justify-content: space-between; /* Главная магия: расталкивает слова по краям */
+  width: 100%;
+}
+.line-1-5 {
+  display: flex;
+  justify-content: flex-start; /* Оставляем их слева, но с зазором */
+  gap: 12vw; /* Расстояние между 'О' и 'СОЗДАТЕЛЯХ' */
+  width: 100%;
+}
+
+.line-2-5 {
+  display: flex;
+  justify-content: space-between; /* Расталкивает пустой span и слово ПРОЕКТА */
+  width: 100%;
+  justify-content: flex-start; /* Оставляем их слева, но с зазором */
+}
+
+.line-1 {
+  display: block;
+  text-align: left;
+}
+
+.line-2 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.shop-flower {
+  position: absolute;
+  width: 15vw;
+  right: 5vw;
+  top: 10vh;
+}
+
+.shop-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2vw;
+  width: 100%;
+}
+
+.shop-card {
+  display: grid; /* Грид для наложения без абсолютного позиционирования */
+  width: 100%;
+  height: auto; /* Позволяем карточке тянуться по высоте контента */
+}
+
+.card-body {
+  grid-area: 1 / 1; /* Кладем карточки в одну ячейку */
+  padding: 1.5vw;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease-in-out;
+}
+
+.card-base {
+  background-color: var(--blue);
+  z-index: 1;
+}
+
+.card-overlay {
+  background-color: var(--bg);
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.shop-card:hover .card-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+.card-img-box {
+  width: 100%;
+  aspect-ratio: 1 / 0.9;
+  background-color: var(--white);
+  border-radius: calc(var(--radius-main) * 0.7);
+  margin-bottom: 2vh;
+}
+
+.card-name {
+  font-size: 2.2vw;
+  line-height: 1;
+  color: var(--white);
+  margin-bottom: 1vh;
+  text-transform: uppercase;
+}
+
+.card-author {
+  font-size: 1vw;
+  color: var(--white);
+  opacity: 0.9;
+  margin-bottom: 1.5vh;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  border-top: 0.1vw solid var(--white);
+  padding-top: 1.2vh;
+  font-size: 1.1vw;
+  color: var(--white);
+}
+
+.card-desc {
+  font-size: 0.95vw;
+  line-height: 1.3;
+  color: var(--white);
+  margin-top: 2vh;
+  padding-bottom: 1vw;
+}
+
+.card-btns {
+  margin-top: auto;
+  display: flex;
+  gap: 0.8vw;
+}
+
+.shop-btn {
+  flex: 1;
+  padding: 1.3vh;
+  border: none;
+  border-radius: calc(var(--radius-main) * 0.5);
+  font-size: 0.8vw;
+  font-weight: 500;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  transition: 0.2s;
+}
+
+.shop-btn.btn-dark {
+  background: #5b5b5b;
+}
+
+.shop-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* === CREATORS СЕКЦИЯ === */
+.creators {
+  background-color: var(--white);
+  height: 100vh !important;
+}
+
+.creators__title {
+  font-size: 4vw;
+  color: var(--blue);
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 4vh;
+  z-index: 10;
+}
+
+.creators__desc-container {
+  display: flex;
+  justify-content: center;
+  gap: 5vw;
+  max-width: 80vw;
+  z-index: 10;
+}
+
+.creators__text {
+  flex: 1;
+  font-size: 1.2vw;
+  line-height: 1.4;
+  color: var(--blue);
+  opacity: 0.9;
+}
+
+#physics-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+
+/* === FAQ СЕКЦИЯ === */
+.faq-section {
+  background-color: #3c2a28;
+  background-image: url("img/brown_back.png");
+  background-size: cover;
+  color: var(--blue);
+}
+
+.faq-title {
+  font-size: 3vw;
+  color: var(--blue) !important;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 8vh;
+  line-height: 1;
+}
+
+.faq-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2vw;
+  width: 100%;
+  max-width: 90vw;
+}
+
+.faq-item {
+  border: 0.1vw solid var(--blue);
+  border-radius: var(--radius-main);
+  margin-bottom: 1.5vh;
+  overflow: hidden;
+  height: fit-content;
+}
+
+.faq-header {
+  padding: 2.5vh 2vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2vw;
+  cursor: pointer;
+  font-size: 1.2vw;
+}
+
+.faq-icon-svg {
+  width: 1.5vw;
+  height: 1.5vw;
+  flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--blue);
+}
+
+.faq-item.active .faq-icon-svg {
+  transform: rotate(180deg);
+}
+
+.faq-content {
+  height: 0;
+  overflow: hidden;
+  padding: 0 2vw;
+}
+
+.faq-content p {
+  padding-bottom: 3vh;
+  font-size: 1.1vw;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+/* === АДАПТИВ ДЛЯ МОБИЛОК === */
+@media (max-width: 768px) {
+  :root {
+    --mobile-title-size: clamp(44px, 10vw, 70px);
+  }
+
+  /* Заголовки на мобилке: только центрирование, без фиксированных ширин */
+  .shop-title,
+  .shop-title5,
+  .shop-title5-1,
+  .about-title,
+  .voices__title,
+  .faq-title,
+  .creators__title {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: center !important;
+  }
+
+  /* Убираем "десктопную" flex-логику строк (меньше переносов и не раздувает ширину) */
+  .title-row {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .line-1-5,
+  .line-2-5 {
+    justify-content: center !important;
+    gap: 0 !important;
+  }
+  .nav-container {
+    max-width: 85vw;
+  }
+  .nav-pill {
+    padding: 0 4vw;
+  }
+  .menu-link {
+    font-size: 6vw;
+  }
+  .content {
+    margin-top: 6vh;
+  }
+  .dropdown-list {
+    width: 100%;
+    height: 100%;
+  }
+  .about-bg {
+    margin-top: -40%;
+  }
+  .bar {
+    width: 8vw;
+    height: 0.6vh;
+  }
+
+  /* Бургер на мобильных: скрываем ссылки и показываем кнопку */
+  .main-nav .nav-wrapper {
+    justify-content: flex-end;
+  }
+  .main-nav .nav-wrapper .nav-item {
+    display: none;
+  }
+  .menu-btn {
+    display: flex;
+  }
+
+  .title {
+    font-size: var(--mobile-title-size) !important;
+  }
+
+  .subtitle {
+    font-size: 3.5vw;
+    width: 80vw;
+  }
+
+  .btn {
+    font-size: 3.5vw;
+    padding: 2vh 6vw;
+    padding-top: 2.5vh !important;
+  }
+
+  .about-section {
+    padding-bottom: 8vh;
+  }
+
+  .cards-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 4vw;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    margin-right: 0;
+    scrollbar-width: none;
+  }
+  .card-body {
+    padding: 3vw; /* Задаем адекватные внутренние отступы для мобилок */
+  }
+  .cards-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card-wrapper {
+    flex: 0 0 85vw;
+    scroll-snap-align: center;
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .card {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 5 / 7;
+    transform: rotate(0deg) !important;
+  }
+
+  .card-title {
+    font-size: 6vw;
+  }
+  .card-text {
+    font-size: 4.5vw;
+  }
+  .card-number {
+    font-size: 4vw;
+  }
+  .about-title {
+    font-size: var(--mobile-title-size) !important;
+  }
+
+  .voices__title {
+    font-size: var(--mobile-title-size) !important;
+  }
+  .voices__subtitle {
+    font-size: 3.5vw;
+    width: 80vw;
+  }
+
+  .gallery__item {
+    width: 36vw;
+    margin-right: 4vw;
+  }
+
+  .gallery__circle {
+    width: 32vw;
+    height: 32vw;
+  }
+
+  .gallery__name {
+    font-size: 3vw;
+  }
+  .gallery__role {
+    font-size: 2.5vw;
+  }
+  .gallery__track {
+    animation-duration: 20s;
+  }
+
+  .flower--left {
+    margin-top: 20vw;
+    margin-left: -15vw;
+    width: 35vw;
+  }
+
+  .flower--right {
+    margin-top: 20vw;
+    margin-right: -35vw;
+    width: 35vw;
+  }
+
+  .shop-container {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 4vh;
+  }
+
+  .shop-title {
+    text-align: center;
+    font-size: var(--mobile-title-size) !important;
+    width: 100%;
+  }
+
+  .shop-title5,
+  .shop-title5-1,
+  .creators__title {
+    font-size: var(--mobile-title-size) !important;
+  }
+
+  .shop-card {
+    width: 85vw;
+    height: auto; /* Убираем жесткую высоту 120vw */
+  }
+
+  /* На мобильных показываем overlay сразу (без hover) */
+  .shop-card .card-overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .card-name {
+    font-size: 8vw;
+  }
+  .card-author {
+    font-size: 4vw;
+  }
+  .card-meta {
+    font-size: 4.5vw;
+  }
+  .card-desc {
+    font-size: 3.5vw;
+    padding-bottom: 2vw;
+  }
+  .shop-btn {
+    font-size: 3vw;
+  }
+  .shop-flower {
+    width: 25vw;
+  }
+  .creators {
+    height: 100vh !important;
+  }
+  .creators__title {
+    font-size: var(--mobile-title-size) !important;
+  }
+  .creators__text {
+    font-size: 3.5vw;
+  }
+  .creators__desc-container {
+    flex-direction: column;
+    gap: 2vh;
+  }
+
+  .faq-container {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-title {
+    font-size: var(--mobile-title-size) !important;
+  }
+  .faq-header {
+    font-size: 4.5vw;
+    padding: 3vh 4vw;
+  }
+  .faq-content p {
+    font-size: 3.5vw;
+  }
+  .faq-icon-svg {
+    width: 6vw;
+    height: 6vw;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* 1. Коричневый цвет оверлея в магазине */
+  .shop-card .card-overlay {
+    /* background-color: #3c2a28 !important; */
+  }
+
+  /* 2. Карточки "О НАС" идут друг под другом статично */
+  .cards-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4vh !important;
+    overflow-x: hidden !important;
+    scroll-snap-type: none !important;
+  }
+
+  .card-wrapper {
+    width: 100% !important;
+    flex: none !important;
+  }
+
+  /* Настройки самой карточки (высота 60% и отключение анимации переворота) */
+  .card {
+    width: 100% !important;
+    height: 60vh !important;
+    aspect-ratio: auto !important;
+    transform: none !important; /* Отключаем стартовый наклон */
+    background: var(--white) !important;
+    border-radius: var(--radius-main) !important;
+    padding: 6vw !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .card:hover {
+    transform: none !important; /* Запрещаем переворот при тапе/наведении */
+  }
+
+  /* Объединяем переднюю и заднюю грани карточки в один слой */
+  .card-face {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Верхний блок с заголовком и цифрой */
+  .card-front {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+  }
+
+  .card-title {
+    margin: 0 !important;
+    align-self: flex-start !important;
+  }
+
+  .card-number {
+    align-self: flex-start !important;
+  }
+
+  /* Нижний блок с текстом (бывшая задняя сторона) */
+  .card-back {
+    margin-top: auto !important; /* Прижимает текст к нижнему краю карточки */
+  }
+
+  .card-text {
+    margin: 0 !important;
+    line-height: 1.4 !important;
+  }
+}

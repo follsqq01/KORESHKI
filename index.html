@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <title>Сказки</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+          <nav class="main-nav">
+  <div class="nav-wrapper">
+    <a href="#home" class="nav-item">ГЛАВНАЯ</a>
+    <a href="#about" class="nav-item">О НАС</a>
+    <a href="#voices" class="nav-item">СКАЗКИ</a>
+    <a href="#faq" class="nav-item">FAQ</a>
+    <a href="#contacts" class="nav-item">КОНТАКТЫ</a>
+    <button
+      class="menu-btn"
+      id="toggleBtn"
+      aria-label="Открыть меню"
+      aria-expanded="false"
+      type="button"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+
+  <div class="dropdown-list" id="dropdownMenu" aria-hidden="true">
+    <a href="#home" class="menu-link nav-item">ГЛАВНАЯ</a>
+    <a href="#about" class="menu-link nav-item">О НАС</a>
+    <a href="#voices" class="menu-link nav-item">СКАЗКИ</a>
+    <a href="#faq" class="menu-link nav-item">FAQ</a>
+    <a href="#contacts" class="menu-link nav-item">КОНТАКТЫ</a>
+    <div class="dropdown-social" aria-label="Социальные сети">
+      <a
+        class="social-link"
+        href="https://vk.com/"
+        target="_blank"
+        rel="noreferrer noopener"
+        aria-label="VK"
+      >
+        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M4.5 7.5c0-.6.5-1.1 1.1-1.1h2.1c.6 0 1 .4 1.1.9.2 1.2.7 2.6 1.5 3.8.2.3.7.3.8-.1.2-.6.3-1.1.3-1.7V7.7c0-.7.6-1.3 1.3-1.3h1.9c.8 0 1.3.6 1.3 1.3v1.1c0 .5-.1 1-.3 1.5-.1.3 0 .6.2.8.8.7 1.7 1.6 2.6 2.7.4.5.1 1.2-.5 1.2h-2.4c-.4 0-.8-.2-1-.5-.6-.8-1.2-1.5-1.9-2-.3-.3-.8-.1-.9.3-.1.6-.1 1.2.1 2 .1.5-.3.9-.8.9H9.2c-3.2 0-4.7-2.5-4.7-5.8V7.5Z"
+          />
+        </svg>
+      </a>
+      <a
+        class="social-link"
+        href="https://t.me/"
+        target="_blank"
+        rel="noreferrer noopener"
+        aria-label="Telegram"
+      >
+        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M21.9 4.6c.4-1.5-1-2.7-2.4-2.1L2.4 9.3C1 9.8 1.1 11.8 2.6 12l4.8 1.3 1.8 5.4c.4 1.1 1.8 1.3 2.5.4l2.9-3.5 4.2 3.1c.9.6 2.1.1 2.3-1l1.8-14Z"
+          />
+        </svg>
+      </a>
+      <a
+        class="social-link"
+        href="https://www.instagram.com/"
+        target="_blank"
+        rel="noreferrer noopener"
+        aria-label="Instagram"
+      >
+        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm-5 4.2a3.8 3.8 0 1 1 0 7.6 3.8 3.8 0 0 1 0-7.6Zm0 2a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6ZM17.6 6.8a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+          />
+        </svg>
+      </a>
+      <a
+        class="social-link"
+        href="https://www.youtube.com/"
+        target="_blank"
+        rel="noreferrer noopener"
+        aria-label="YouTube"
+      >
+        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.7 4.6 12 4.6 12 4.6s-5.7 0-7.5.5A3 3 0 0 0 2.4 7.2 31.5 31.5 0 0 0 2 12a31.5 31.5 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.8.5 7.5.5 7.5.5s5.7 0 7.5-.5a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 22 12a31.5 31.5 0 0 0-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z"
+          />
+        </svg>
+      </a>
+    </div>
+  </div>
+</nav>
+    <section class="hero">
+      <!-- <div class="main-wrapper"> -->
+        <!-- <div class="nav-container">
+          <header class="nav-pill">
+            <img
+              src="img/icon_home.svg"
+              alt="Лого"
+              class="icon_home"
+              id="logo"
+            />
+            <button class="menu-btn" id="toggleBtn">
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </button>
+          </header>
+
+          <nav class="dropdown-list" id="dropdownMenu">
+            <a href="#home" class="menu-link">ГЛАВНАЯ</a>
+            <a href="#voices" class="menu-link">ГОЛОСА СКАЗОК</a>
+            <a href="#shop" class="menu-link">МАГАЗИН</a>
+            <a href="#about" class="menu-link">О НАС</a>
+            <a href="#faq" class="menu-link">FAQ</a>
+            <a href="#contacts" class="menu-link">КОНТАКТЫ</a>
+          </nav> -->
+        </div>
+<div class="stickers"><img src="img/Group 39735.svg"width="190" height="190" viewBox="0 0 500 500" alt=""></div>
+
+        <main class="content">
+          <!-- <img src="img/chruzeva.png" alt="" class="cruzheva_home" /> -->
+          <h1 class="shop-title5-1">
+  <span class="title-row">
+    <span>СКАЗКИ,</span>
+    <span>ОЗВУЧЕННЫЕ</span>
+  </span>
+  <span class="title-row">
+    <span>РЕАЛЬНЫМИ</span>
+    <span>ЛЮДЬМИ</span>
+  </span>
+</h1>
+          <p class="subtitle">
+            почувствуй магию сказки и помоги пожилому<br />поколению
+            почувствовать себя частью сказки
+          </p>
+
+          <div class="btn-group">
+            <a href="#buy" class="btn btn-fill">КУПИТЬ</a>
+            <a href="#more" class="btn btn-border">УЗНАТЬ БОЛЬШЕ</a>
+          </div>
+
+          <div class="mockup">
+            <div class="mockup-inner"></div>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <div class="scroll-wrapper">
+    <section class="about-section">
+      <!-- <div class="about-bg"><img src="img/chruzeva.png" alt=""></div> -->
+      <div class="cards-container">
+        <div class="card-wrapper">
+
+          <div class="card" style="--rotation: -5deg">
+            <div class="card-face card-front">
+              <span class="card-title">Эмоциональный<br />обмен</span>
+              <span class="card-number">01</span>
+            </div>
+            <div class="card-face card-back">
+              <p class="card-text">
+                Здесь будет описание первого пункта вашего проекта при
+                наведении.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card" style="--rotation: 0deg">
+            <div class="card-face card-front">
+              <span class="card-title bottom">Прозрачная<br />система</span>
+              <span class="card-number top-right">02</span>
+            </div>
+            <div class="card-face card-back">
+              <p class="card-text">
+                Полная открытость всех процессов и понятная механика
+                взаимодействия.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card" style="--rotation: 5deg">
+            <div class="card-face card-front">
+              <span class="card-title">Социальная<br />основа</span>
+              <span class="card-number bottom-right">03</span>
+            </div>
+            <div class="card-face card-back">
+              <p class="card-text">
+                Мы строим сообщество, основанное на доверии и общих ценностях.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="shop-title">
+  <span class="title-row">
+    <span>НЕМНОГО</span>
+  </span>
+  <span class="title-row">
+    <span>О НАШЕМ</span>
+    <span>ПРОЕКТЕ</span>
+  </span>
+</h2>
+    </section>
+        </div>
+        <!-- Галерея дикторов: кружки, подписи, циклическая прокрутка, стоп при наведении -->
+    <section class="voices" id="voices" aria-label="Голоса дикторов">
+      <img src="img/flowers.svg" alt="" class="flower flower--left" />
+      <img src="img/flowers.svg" alt="" class="flower flower--right" />
+      <div class="voices__inner">
+       <!-- <h2 class="voices__title">
+  <span class="title-row">
+    <span>ГОЛОСА</span>
+    <span>НАШИХ</span>
+  </span>
+  <span class="title-row" style="justify-content: center;"> <span>ДИКТОРОВ!</span>
+  </span>
+</h2> -->
+        <p class="voices__subtitle">
+          Мы верим, что каждый живой голос бабушек и дедушек способен на чудо!
+        </p>
+        <div class="gallery" id="gallery">
+          <div class="gallery__track" id="galleryTrack">
+            <div class="gallery__item">
+              <div class="gallery__circle">
+                <img src="img/wallap.png" alt="" />
+              </div>
+              <span class="gallery__name">Анна Петрова</span>
+              <span class="gallery__role">Диктор сказок</span>
+            </div>
+            <div class="gallery__item">
+              <div class="gallery__circle">
+                 <img src="img/wallap.png" alt="" />
+              </div>
+              <span class="gallery__name">Михаил Соколов</span>
+              <span class="gallery__role">Озвучка</span>
+            </div>
+            <div class="gallery__item">
+              <div class="gallery__circle">
+             <img src="img/wallap.png" alt="" />
+              </div>
+              <span class="gallery__name">Елена Козлова</span>
+              <span class="gallery__role">Чтец</span>
+            </div>
+            <div class="gallery__item">
+              <div class="gallery__circle">
+                    <img src="img/wallap.png" alt="" />
+              </div>
+              <span class="gallery__name">Виктор Новиков</span>
+              <span class="gallery__role">Диктор</span>
+            </div>
+            <div class="gallery__item">
+              <div class="gallery__circle">
+                      <img src="img/wallap.png" alt="" />
+              </div>
+              <span class="gallery__name">Ольга Морозова</span>
+              <span class="gallery__role">Озвучка сказок</span>
+            </div>
+            <div class="gallery__item">
+              <div class="gallery__circle">
+                    <img src="img/wallap.png" alt="" />
+              </div>
+              <span class="gallery__name">Дмитрий Волков</span>
+              <span class="gallery__role">Чтец</span>
+            </div>
+            <!-- Дубликат для бесшовного цикла -->
+            <div class="gallery__item">
+              <div class="gallery__circle">
+                        <img src="img/wallap.png" alt="" />
+              </div>
+              <span class="gallery__name">Анна Петрова</span>
+              <span class="gallery__role">Диктор сказок</span>
+            </div>
+            <div class="gallery__item">
+              <div class="gallery__circle">
+                            <img src="img/wallap.png" alt="" />
+              </div>
+              <span class="gallery__name">Михаил Соколов</span>
+              <span class="gallery__role">Озвучка</span>
+            </div>
+            <div class="gallery__item">
+              <div class="gallery__circle">
+                 <img src="img/wallap.png" alt="" />
+              </div>
+              <span class="gallery__name">Елена Козлова</span>
+              <span class="gallery__role">Чтец</span>
+            </div>
+            <div class="gallery__item">
+              <div class="gallery__circle">
+             <img src="img/wallap.png" alt="" />
+              </div>
+              <span class="gallery__name">Виктор Новиков</span>
+              <span class="gallery__role">Диктор</span>
+            </div>
+            <div class="gallery__item">
+              <div class="gallery__circle">
+         <img src="img/wallap.png" alt="" />
+              </div>
+              <span class="gallery__name">Ольга Морозова</span>
+              <span class="gallery__role">Озвучка сказок</span>
+            </div>
+            <div class="gallery__item">
+              <div class="gallery__circle">
+              <img src="img/wallap.png" alt="" />
+              </div>
+              <span class="gallery__name">Дмитрий Волков</span>
+              <span class="gallery__role">Чтец</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="shop" id="shop">
+<h2 class="shop-title">
+  <span class="title-row">
+    <span>БЕТА-СКАЗКИ</span>
+  </span>
+  <span class="title-row">
+    <span>ОТ НАШИХ</span>
+    <span>ДРУЗЕЙ!</span>
+  </span>
+</h2>
+    <img src="img/plant.svg" alt="" class="shop-flower flower-right">
+  </div>
+
+  <div class="shop-container">
+    <div class="shop-card">
+      <div class="card-body card-base">
+        <div class="card-img-box"></div>
+        <h3 class="card-name">ВЕРШКИ-<br>КОРЕШКИ</h3>
+        <p class="card-author">Читает: Нина Александровна</p>
+        <div class="card-meta">
+          <span>13 мин</span>
+          <span>120 ₽</span>
+        </div>
+      </div>
+
+      <div class="card-body card-overlay">
+        <div class="card-img-box"></div>
+        <h3 class="card-name">ВЕРШКИ-<br>КОРЕШКИ</h3>
+        <p class="card-author">Читает: Нина Александровна</p>
+        <div class="card-meta">
+          <span>13 мин</span>
+          <span>120 ₽</span>
+        </div>
+        <p class="card-desc">
+          Репка растёт огромная, а справиться с ней помогают дружба, смекалка и даже самая маленькая мышка.
+        </p>
+        <div class="card-btns">
+          <button class="shop-btn">ПОДРОБНЕЕ →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="shop-card">
+      <div class="card-body card-base">
+        <div class="card-img-box"></div>
+        <h3 class="card-name">ЦАРЕВНА-<br>ЛЯГУШКА</h3>
+        <p class="card-author">Читает: Светлана Владимировна</p>
+        <div class="card-meta">
+          <span>15 мин</span>
+          <span>120 ₽</span>
+        </div>
+      </div>
+
+      <div class="card-body card-overlay">
+        <div class="card-img-box"></div>
+        <h3 class="card-name">ЦАРЕВНА-<br>ЛЯГУШКА</h3>
+        <p class="card-author">Читает: Светлана Владимировна</p>
+        <div class="card-meta">
+          <span>15 мин</span>
+          <span>120 ₽</span>
+        </div>
+        <p class="card-desc">История о том, как важно смотреть вглубь сердца, а не только на внешность.</p>
+         <div class="card-btns">
+          <button class="shop-btn">ПОДРОБНЕЕ →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="shop-card">
+      <div class="card-body card-base">
+        <div class="card-img-box"></div>
+        <h3 class="card-name">ВЕРШКИ-<br>КОРЕШКИ</h3>
+        <p class="card-author">Читает: Нина Александровна</p>
+        <div class="card-meta">
+          <span>13 мин</span>
+          <span>120 ₽</span>
+        </div>
+      </div>
+
+      <div class="card-body card-overlay">
+        <div class="card-img-box"></div>
+        <h3 class="card-name">ВЕРШКИ-<br>КОРЕШКИ</h3>
+        <p class="card-author">Читает: Нина Александровна</p>
+        <div class="card-meta">
+          <span>13 мин</span>
+          <span>120 ₽</span>
+        </div>
+        <p class="card-desc">Репка растёт огромная, а спРепка растёт огромная,Репка растёт огромная, а спраРепка растёт огромная, а спраРепка растёт огромная.</p>
+    <div class="card-btns">
+          <button class="shop-btn">ПОДРОБНЕЕ →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="creators" id="about">
+<h2 class="shop-title5">
+  <span class="title-row">
+    <span>О</span>
+    <span>СОЗДАТЕЛЯХ</span>
+  </span>
+  <span class="title-row" style="justify-content: flex-end;"> <span>ПРОЕКТА</span>
+  </span>
+</h2>
+  <div class="creators__desc-container">
+    <p class="creators__text">Привет! Мы команда создателей этого проекта. Мы верим, что сказки объединяют поколения. Мы верим, что сказки объединяют поколения</p>
+    <p class="creators__text">Наша цель — сохранить тепло живого голоса и подарить заботу тем, кто в ней нуждается. Мы верим, что сказки объединяют поколения</p>
+  </div>
+  <div id="physics-container"></div>
+</section>
+    <!-- <section class="faq-section">
+      <h2 class="faq-title">Ответы на часто<br />задаваемые вопросы</h2>
+
+      <div class="faq-container">
+        <div class="faq-column">
+          <div class="faq-item">
+            <div class="faq-header">
+              <span
+                >Как стать участником проекта?</span
+              >
+              <svg
+                class="faq-icon-svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 9L12 15L18 9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="faq-content">
+              <p>
+                Если вы хотите поучаствовать в нашем проекте и присоединиться к нашей команде как креатор, то, пожалуйста, напишите на нашу почту: korezhki@yandex.ru
+              </p>
+            </div>
+          </div>
+<div class="faq-item">
+            <div class="faq-header">
+              <span
+                >Куда обратиться по поводу возврата товара?</span
+              >
+              <svg
+                class="faq-icon-svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 9L12 15L18 9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="faq-content">
+              <p>
+                Если у вас возникли вопросы по качеству товара или проблем с его получением, вы всегда можете написать нам на посту для решения этого вопроса: korezhki@yandex.ru
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-header">
+              <span
+                >Почему вы считаетесь социальным проектом?</span
+              >
+              <svg
+                class="faq-icon-svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 9L12 15L18 9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="faq-content">
+              <p>Спасибо за вопрос! Мы позиционируем себя как проект с социальноц основой, так как ежемесячно жертвуем средства, заработанные на проекте, в пансионаты и дома престарелых. Кроме того, в наших социальных соц.сетях Вы можете увидеть анонсы конкурсов и мероприятий, поомгающий пожилым людям.</p>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="faq-column">
+          <div class="faq-item">
+            <div class="faq-header">
+              <span
+                >Что делать, если сказка не пришла?</span
+              >
+              <svg
+                class="faq-icon-svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 9L12 15L18 9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="faq-content">
+              <p>Если сказка не пришла к вам на посту, то, пожалуйста, обратитесь в нашу службу клиентской заботы, направи письмо на почту: korezhki@yandex.ru .</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-header">
+              <span
+                >Куда придет моя сказка?</span
+              >
+              <svg
+                class="faq-icon-svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 9L12 15L18 9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="faq-content">
+              <p>На данном этапе наш основной сайт находится на этапе разработки, поэтому, если вы хотите купить сказку сейчас, то мы отправим её любым удобным для вас способом, а также выдадим спеициальный промокод, который, при выходе сайта, позволит вам непосредстенно на самой платформе прослушивать приобретённыый аудиоконтент! </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-header">
+              <span
+                >Что делать, ели мерча нет в наличии?</span
+              >
+              <svg
+                class="faq-icon-svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 9L12 15L18 9"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="faq-content">
+              <p>К сожалению, партии мерча производятся небольшими партиями из-за того, что каждая вещь создаётся вручную </p>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+         <div class="faq-footer-image">
+  </div>
+    </section> -->
+
+</div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
