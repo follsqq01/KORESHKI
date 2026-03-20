@@ -795,7 +795,7 @@ h3 {
 /* === FAQ СЕКЦИЯ === */
 .faq-section {
   background-color: #3c2a28;
-  background-image: url("img/brown_back.png");
+  /* background-image: url("img/brown_back.png"); */
   background-size: cover;
   border-radius: 5vw 5vw 0% 0%;
   color: var(--blue);
