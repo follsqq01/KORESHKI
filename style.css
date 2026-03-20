@@ -1082,7 +1082,7 @@ h3 {
     width: 25vw;
   }
   .creators {
-    height: 100vh !important;
+    height: 97vh !important;
   }
   .creators__title {
     font-size: var(--mobile-title-size) !important;
@@ -1193,7 +1193,7 @@ h3 {
   }
   .dropdown-list.open {
     height: 100vh; /* Растягиваем меню на весь экран */
-    padding: 12vh 0 5vh; /* Сдвигаем ссылки чуть ниже от шапки */
+    padding: 12vh 0 12vh; /* Сдвигаем ссылки чуть ниже от шапки */
   }
   .dropdown-social {
     margin-top: auto !important; /* Магия flexbox: выталкивает блок в самый низ */
@@ -1213,5 +1213,8 @@ h3 {
   /* --- 3. Физический контейнер не блокирует скролл --- */
   #physics-container {
     pointer-events: none !important; /* Касания проходят насквозь к странице */
+  }
+  .hero {
+    height: 100vh !important;
   }
 }
