@@ -1007,7 +1007,9 @@ h3 {
   .about-title {
     font-size: var(--mobile-title-size) !important;
   }
-
+  .card-overlay {
+    background-color: var(--blue);
+  }
   .voices__title {
     font-size: var(--mobile-title-size) !important;
   }
@@ -1097,7 +1099,7 @@ h3 {
     width: 25vw;
   }
   .creators {
-    height: 90vh !important;
+    height: 95vh !important;
   }
   .creators__title {
     font-size: var(--mobile-title-size) !important;

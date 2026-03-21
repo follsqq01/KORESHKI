@@ -311,31 +311,12 @@ navLinks.forEach((link) => {
 });
 
 // Фиксируем первый экран, чтобы второй наезжал на него
-ScrollTrigger.matchMedia({
-  // Десктопная версия: экран шире 768px
-  "(min-width: 769px)": function () {
-    // Фиксация .hero
-    ScrollTrigger.create({
-      trigger: ".hero",
-      start: "top top",
-      end: "bottom top",
-      pin: true,
-      pinSpacing: false,
-    });
+ScrollTrigger.create({
+  trigger: ".hero", // ЗАМЕНИ на ID или класс твоего первого экрана (где главный заголовок)
+  start: "top top", // Начинаем фиксировать, когда верх блока касается верха экрана
 
-    // Фиксация .creators
-    ScrollTrigger.create({
-      trigger: ".creators",
-      start: "top top",
-      end: "bottom top",
-      pin: true,
-      pinSpacing: false,
-    });
-  },
-
-  // Все, что меньше 768px (мобилки)
-  "(max-width: 768px)": function () {
-    // Здесь ничего писать не нужно.
-    // GSAP сам отключит триггеры, описанные выше, когда экран станет узким.
-  },
+  end: "bottom top", // Отпускаем первый экран, когда НИЗ секции с карточками коснется ВЕРХА экрана
+  pin: true, // Прикалываем блок
+  pinSpacing: false, // ВАЖНО: убираем отступ внизу, что позволяет следующему блоку наехать сверху
 });
+// Фиксируем первый экран, чтобы второй наезжал на него
