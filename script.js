@@ -127,13 +127,15 @@ function initPhysics() {
   });
 
   // --- ГРАНИЦЫ ---
+  const floorOffset = window.innerWidth * 0.055; // 5.5vw наложение секции FAQ плюс буфер
   const floor = Bodies.rectangle(
     render.options.width / 2,
-    render.options.height + 25,
+    render.options.height - floorOffset + 25,
     render.options.width,
     50,
     {
       isStatic: true,
+      label: "floor",
       render: { visible: false }, // Скрывает визуальное отображение пола
     }
   );
@@ -145,6 +147,7 @@ function initPhysics() {
     render.options.height,
     {
       isStatic: true,
+      label: "wallLeft",
       render: { visible: false }, // Скрывает левую стену
     }
   );
@@ -156,6 +159,7 @@ function initPhysics() {
     render.options.height,
     {
       isStatic: true,
+      label: "wallRight",
       render: { visible: false }, // Скрывает правую стену
     }
   );
@@ -280,18 +284,19 @@ window.addEventListener("resize", () => {
   // Мы ищем их по признаку isStatic, который вы задали при создании
   const bodies = Matter.Composite.allBodies(engine.world);
 
+  const floorOffset = window.innerWidth * 0.055; // 5.5vw наложение секции FAQ плюс буфер
   bodies.forEach((body) => {
     if (body.isStatic) {
       // Пол (он был в центре по горизонтали и внизу по вертикали)
-      if (body.position.y > height - 50) {
-        Matter.Body.setPosition(body, { x: width / 2, y: height + 25 });
+      if (body.label === "floor" || body.position.y > height - 100) {
+        Matter.Body.setPosition(body, { x: width / 2, y: height - floorOffset + 25 });
       }
       // Левая стена
-      else if (body.position.x < 0) {
+      else if (body.label === "wallLeft" || body.position.x < 0) {
         Matter.Body.setPosition(body, { x: -25, y: height / 2 });
       }
       // Правая стена
-      else if (body.position.x > 0) {
+      else if (body.label === "wallRight" || body.position.x > 0) {
         Matter.Body.setPosition(body, { x: width + 25, y: height / 2 });
       }
     }
@@ -401,3 +406,4 @@ window.addEventListener("resize", () => {
   // Заставляем ScrollTrigger пересчитать все позиции
   ScrollTrigger.refresh();
 });
+
