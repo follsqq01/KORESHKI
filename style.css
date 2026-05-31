@@ -1,8 +1,8 @@
 :root {
   --bg: #f14c2d;
-  --white: #fffaf5;
-  --menu-bg: #fffaf5;
-  --blue: #b4c1c7;
+  --white: #FFFEFD;
+  --menu-bg: #FFFEFD;
+  --blue: #B2CCED;
   --font: "Helvetica Neue Custom", Helvetica, Arial, sans-serif;
 
   /* Единые переменные для резиновости */
@@ -25,7 +25,7 @@
 .mark {
   display: inline;
   background: #f14c2d;
-  color: #fffaf5;
+  color: #FFFEFD;
   padding: 0.08em 0.2em;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
@@ -94,7 +94,7 @@ h3 {
   height: auto;
 }
 .creators {
-  height: 80vh !important;
+  min-height: 80vh !important;
 }
 /* === HERO СЕКЦИЯ === */
 .hero {
@@ -122,7 +122,7 @@ h3 {
   left: 0;
   width: 100%;
   height: 5vh;
-  background-color: #fffaf5; /* Тот самый бежевый фон из ваших переменных */
+  background-color: #FFFEFD; /* Тот самый бежевый фон из ваших переменных */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -303,6 +303,10 @@ h3 {
 /* По умолчанию на мобилках оставляем как есть или явно задаем низкий слой */
 #physics-container {
   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1; /* Под текстом */
   pointer-events: none; /* Чтобы можно было выделять текст под шарами */
 }
@@ -310,7 +314,7 @@ h3 {
 /* На ноутбуках и ПК поднимаем над всем контентом */
 @media (min-width: 769px) {
   #physics-container {
-    z-index: 9999; /* Поверх всего */
+    z-index: 1500; /* Поверх всего контента секции, но ниже fixed-навигации (z-index: 2000) */
     pointer-events: none; /* Важно: чтобы клики проходили сквозь контейнер на кнопки сайта */
   }
 
@@ -380,7 +384,7 @@ h3 {
 
 /* === ABOUT СЕКЦИЯ === */
 .about-section {
-  background-color: var(--blue);
+  background: linear-gradient(180deg, var(--blue) 0%, var(--white) 100%);
   overflow: hidden;
   border-radius: 5vw 5vw 0% 0%; /* Скругляем только верхние углы */
   z-index: 10;
@@ -592,7 +596,7 @@ h3 {
   height: 15vw;
   border-radius: 50%; /* Кружки оставляем круглыми */
   overflow: hidden;
-  background: #b4c1c7;
+  background: #B2CCED;
   margin-bottom: 2vh;
   flex-shrink: 0;
   /* box-shadow: 0 0.5vh 1vw rgba(0, 0, 0, 0.2); */
@@ -642,9 +646,8 @@ h3 {
 
 /* === SHOP СЕКЦИЯ === */
 .shop {
-  background-color: var(--blue);
+  background: var(--white);
   border-radius: 5vw 5vw 0% 0%;
-  z-index: 10;
   margin-top: -5vw;
   z-index: 2 !important;
 }
@@ -684,26 +687,33 @@ h3 {
 
 .shop-title5,
 .creators__title {
+  color: var(--white) !important;
+  z-index: 10;
   font-size: 4vw !important;
-  color: var(--blue);
-  margin-bottom: 6vh;
+  margin-bottom: 6vh !important;
 }
 
-.voices__title,
 .faq-title {
   font-size: 4vw !important;
   color: var(--blue);
-  margin-bottom: 5vh;
+  margin-bottom: 6vh !important;
 }
-.about-title {
+
+.voices__title {
   font-size: 4vw !important;
-  color: var(--white);
+  color: var(--blue);
+  margin-bottom: 2vh !important;
+}
+.about-title,
+.about-section .shop-title {
+  font-size: 4vw !important;
+  color: var(--white) !important;
 }
 
 .shop-title {
   font-size: 4vw !important;
-  color: var(--white); /* Белый для секции магазина */
-  margin-bottom: 1vh;
+  color: var(--blue); /* Изменено с var(--white) */
+  margin-bottom: 6vh !important;
 }
 .shop-title5-1 {
   font-size: 4.5vw;
@@ -778,8 +788,22 @@ h3 {
 }
 
 .card-base {
-  background-color: var(--blue);
+  background-color: transparent;
   z-index: 1;
+}
+
+.card-base .card-name {
+  color: var(--blue);
+}
+
+.card-base .card-author {
+  color: var(--blue);
+  opacity: 0.9;
+}
+
+.card-base .card-meta {
+  color: var(--blue);
+  border-top: 0.1vw solid var(--blue);
 }
 
 .card-overlay {
@@ -870,17 +894,10 @@ h3 {
 
 /* === CREATORS СЕКЦИЯ === */
 .creators {
-  background-color: var(--white);
-  height: 100vh !important;
-}
-
-.creators__title {
-  font-size: 4vw;
-  color: var(--blue);
-  text-align: center;
-  text-transform: uppercase;
-  margin-bottom: 4vh;
-  z-index: 10;
+  background: linear-gradient(180deg, var(--blue) 0%, #ebf0f6 100%) !important;
+  min-height: 80vh !important;
+  height: auto !important;
+  border-radius: 0 !important;
 }
 
 .creators__desc-container {
@@ -895,7 +912,7 @@ h3 {
   flex: 1;
   font-size: 1.5vw;
   line-height: 1.4;
-  color: var(--blue);
+  color: var(--white) !important;
   opacity: 0.9;
 }
 
@@ -922,6 +939,8 @@ p {
   border-radius: 5vw 5vw 0% 0%;
   color: var(--blue);
   padding-bottom: 0vh !important;
+  margin-top: -5vw;
+  z-index: 2 !important;
 }
 
 .faq-title {
@@ -1012,6 +1031,7 @@ p {
     margin-left: 0 !important;
     margin-right: 0 !important;
     text-align: center !important;
+    margin-bottom: 4vh !important;
   }
 
   /* Убираем "десктопную" flex-логику строк (меньше переносов и не раздувает ширину) */
@@ -1129,11 +1149,10 @@ p {
   .about-title {
     font-size: var(--mobile-title-size) !important;
   }
-  .card-overlay {
-    background-color: var(--b);
-  }
+
   .voices__title {
     font-size: var(--mobile-title-size) !important;
+    margin-bottom: 1.5vh !important;
   }
   .voices__subtitle {
     font-size: 3.5vw;
@@ -1198,8 +1217,8 @@ p {
 
   /* На мобильных показываем overlay сразу (без hover) */
   .shop-card .card-overlay {
-    opacity: 1;
-    visibility: visible;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .card-name {
@@ -1222,7 +1241,7 @@ p {
     width: 25vw;
   }
   .creators {
-    height: 95vh !important;
+    min-height: 95vh !important;
   }
   .creators__title {
     font-size: var(--mobile-title-size) !important;
@@ -1345,8 +1364,6 @@ p {
   }
 
   .about-section .shop-title {
-    order: -1 !important; /* Заставляет элемент встать самым первым */
-    margin-bottom: 5vh !important; /* Добавляем отступ между заголовком и первой карточкой */
     margin-top: 0 !important;
   }
 
@@ -1362,11 +1379,11 @@ p {
 /* === FOOTER СЕКЦИЯ === */
 .footer {
   background-color: #3c2a28; /* Темно-коричневый фон, как в блоке FAQ */
-  padding: 8vh var(--section-pad-x) 0; /* Убираем нижний отступ, чтобы обрезать текст */
+  padding: 6vh var(--section-pad-x); /* Равномерный отступ сверху и снизу */
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 35vh;
+  height: auto;
   position: relative;
   overflow: hidden;
 }
